@@ -1,0 +1,7 @@
+firstName,lastName,email,password
+K,S,k,1
+test,test,test@test.test,
+,kerry,jkerry@gmail.com,pAssWord123!
+john,,jkerry@gmail.com,pAssWord123!
+john,kerry,,pAssWord123!
+john,kerry,jkerry@gmail.com,
