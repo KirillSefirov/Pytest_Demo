@@ -10,6 +10,7 @@ def test_post():
 def test_put():
     return 0
 
+
 def test_delete():
     return 0
 
