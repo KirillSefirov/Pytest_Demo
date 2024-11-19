@@ -1,5 +1,5 @@
 import pytest
-import utils.helper as helper
+from utils import helper
 
 user_tokens = {}
 
@@ -14,9 +14,3 @@ def test_users(base_url):
     helper.create_test_users(base_url)
     yield helper.created_users
     helper.delete_test_users(base_url)
-
-
-def delete_test_users():
-    helper.delete_test_users(base_url)
-
-# TODO fill custom assertion messages
