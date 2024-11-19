@@ -1,4 +1,9 @@
-FROM ubuntu:latest
+FROM python:3.11
 LABEL authors="dpkarasev"
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /pytest_demo
+
+COPY . .
+RUN pip install -r requirements.txt
+
+CMD ["pytest"]
