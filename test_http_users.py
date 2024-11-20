@@ -1,9 +1,14 @@
 import http
 import pytest
+import allure
 from utils import api
 from utils import helper
 
 
+@allure.label("owner", "Dmitry Karasev")
+@allure.title("Test Registration")
+@allure.tag("API", "Regression", "Registration")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.parametrize("first_name,last_name,email,password",
                          helper.get_valid_users_from_file_as_parameters())
 def test_post_register_new_user(base_url, first_name, last_name, email, password):
@@ -15,6 +20,10 @@ def test_post_register_new_user(base_url, first_name, last_name, email, password
     api.delete_existing_user(base_url, email, password)
 
 
+@allure.label("owner", "Dmitry Karasev")
+@allure.title("Test User Removal")
+@allure.tag("API", "Regression")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.parametrize("first_name,last_name,email,password",
                          helper.get_valid_users_from_file_as_parameters())
 def test_delete_registered_user(base_url, first_name, last_name, email, password):
@@ -25,12 +34,20 @@ def test_delete_registered_user(base_url, first_name, last_name, email, password
     assert user_profile.status_code == http.HTTPStatus.UNAUTHORIZED
 
 
+@allure.label("owner", "Dmitry Karasev")
+@allure.title("Test Get User Profile")
+@allure.tag("API", "Regression", "Registration")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_get_user_profile(base_url, test_users):
     for user in test_users:
         response = api.get_user_profile(base_url, user['email'])
         assert user['email'] == response.json()['email']
 
 
+@allure.label("owner", "Dmitry Karasev")
+@allure.title("Test Update User Profile")
+@allure.tag("API", "Regression")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.parametrize("new_first_name,new_last_name",
                          helper.get_first_and_last_names_as_parameters())
 def test_patch_update_user_profile(base_url, test_users, new_first_name, new_last_name):
