@@ -4,6 +4,7 @@ LABEL authors="dpkarasev"
 WORKDIR /pytest_demo
 
 COPY . .
-RUN pip install -r requirements.txt
 
-CMD ["pytest"]
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["pytest", "--alluredir", "allure-results"]
