@@ -1,5 +1,7 @@
 Just a little demo project to showcase the usage pytest framework to test and evaluate rest backend methods
 
+[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
+
 # Local run
 1) On your laptop install allure (for example `brew install allure`)
 2) Install necessary libraries using `pip install --no-cache-dir -r requirements.txt`
