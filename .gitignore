@@ -164,3 +164,7 @@ cython_debug/
 
 #Allure reports
 allure_result_folder/
+allure-result*/
+
+#Pytest logs
+logs/
