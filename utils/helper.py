@@ -46,38 +46,9 @@ def get_first_and_last_names_as_parameters():
     return names
 
 
-@allure.step("Helper. Creating test users using api")
-def create_test_users(usersClient):
-    list_of_users = get_valid_users_raw_info_from_file_as_parameters()
-    for user in list_of_users:
-        usersClient.register_new_user(first_name=user[0],
-                                      last_name=user[1],
-                                      email=user[2],
-                                      password=user[3]
-                                      )
-        created_users.append(
-            {
-                "first_name": user[0],
-                "last_name": user[1],
-                "email": user[2],
-                "password": user[3]
-            }
-        )
-
-
-@allure.step("Helper. Deleting test users using api")
-def delete_test_users(usersClient):
-    list_of_users = get_valid_users_raw_info_from_file_as_parameters()
-    for user in list_of_users:
-        usersClient.delete_existing_user(email=user[2],
-                                         password=user[3]
-                                         )
-
-
 def get_test_users(usersClient):
     list_of_users_info = get_valid_users_from_file()
     list_of_users = []
-    # usersClient = UsersApiClient(base_url="https://thinking-tester-contact-list.herokuapp.com/")
     for user_info in list_of_users_info:
         list_of_users.append(User(user_info["first_name"],
                                   user_info["last_name"],
@@ -105,9 +76,3 @@ def delete_new_test_users(usersClient, users):
                                          password=user.password,
                                          token=user.token
                                          )
-# usrs = get_test_users()
-# print(usrs)
-# for usera in usrs:
-#     print("Users are next")
-#     print(astuple(usera))
-#     print(asdict(usera))

@@ -23,11 +23,5 @@ class ContactsApiClient(UsersApiClient):
         headers = {
             "Authorization": "Bearer " + token
         }
-        print("Contacts user email " + user_email)
-        print("Contact info " + str(contact_info))
         response = requests.post(self.base_url + "contacts", json=contact_info, headers=headers)
-        print("Request info " + str(response.request.body))
-        print("Request info " + response.request.url)
-        print("Request info " + str(response.request.headers))
-        print(response.json())
         return response
