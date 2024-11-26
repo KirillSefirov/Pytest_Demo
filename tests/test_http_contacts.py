@@ -1,4 +1,5 @@
 import http
+
 import allure
 
 
@@ -8,7 +9,7 @@ import allure
 @allure.severity(allure.severity_level.CRITICAL)
 def test_post_add_new_contact(base_url_contacts, test_users):
     for user in test_users:
-        add_contact_response = base_url_contacts.add_contact(user["email"])
+        add_contact_response = base_url_contacts.add_contact(user.email, user.token)
         assert add_contact_response.status_code == http.HTTPStatus.CREATED
 
 

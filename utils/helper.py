@@ -1,5 +1,11 @@
 import csv
+import os
+from dataclasses import astuple
+
 import allure
+
+from api.users_api import UsersApiClient
+from utils.user import User
 
 created_users = []
 
@@ -66,3 +72,42 @@ def delete_test_users(usersClient):
         usersClient.delete_existing_user(email=user[2],
                                          password=user[3]
                                          )
+
+
+def get_test_users(usersClient):
+    list_of_users_info = get_valid_users_from_file()
+    list_of_users = []
+    # usersClient = UsersApiClient(base_url="https://thinking-tester-contact-list.herokuapp.com/")
+    for user_info in list_of_users_info:
+        list_of_users.append(User(user_info["first_name"],
+                                  user_info["last_name"],
+                                  user_info["email"],
+                                  user_info["password"]))
+    for user in list_of_users:
+        response = usersClient.register_new_user(user.first_name, user.last_name, user.email, user.password)
+        user.token = response.json()['token']
+    return list_of_users
+
+
+def get_test_users_as_parameters():
+    users_client = UsersApiClient(base_url=os.environ['BASE_URL'])
+    users = get_test_users(users_client)
+    list_of_tuples = []
+    for user in users:
+        list_of_tuples.append(astuple(user))
+    return list_of_tuples
+
+
+@allure.step("Helper. Deleting test users using api")
+def delete_new_test_users(usersClient, users):
+    for user in users:
+        usersClient.delete_existing_user(email=user.email,
+                                         password=user.password,
+                                         token=user.token
+                                         )
+# usrs = get_test_users()
+# print(usrs)
+# for usera in usrs:
+#     print("Users are next")
+#     print(astuple(usera))
+#     print(asdict(usera))

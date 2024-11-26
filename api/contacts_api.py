@@ -1,12 +1,12 @@
 import requests
 import allure
-from api.users_api import user_tokens, UsersApiClient
+from api.users_api import UsersApiClient
 
 
 class ContactsApiClient(UsersApiClient):
 
     @allure.step("API. Adding a new contact to existing user")
-    def add_contact(self, user_email):
+    def add_contact(self, user_email, token):
         contact_info = {
             "firstName": "Kirill",
             "lastName": "Sefirov",
@@ -21,10 +21,9 @@ class ContactsApiClient(UsersApiClient):
             "country": "USA"
         }
         headers = {
-            "Authorization": "Bearer " + user_tokens[user_email]
+            "Authorization": "Bearer " + token
         }
         print("Contacts user email " + user_email)
-        print("Contacts user token " + user_tokens[user_email])
         print("Contact info " + str(contact_info))
         response = requests.post(self.base_url + "contacts", json=contact_info, headers=headers)
         print("Request info " + str(response.request.body))
