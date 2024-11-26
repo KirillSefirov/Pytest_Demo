@@ -70,7 +70,7 @@ def get_test_users_as_parameters():
 
 
 @allure.step("Helper. Deleting test users using api")
-def delete_new_test_users(usersClient, users):
+def delete_test_users(usersClient, users):
     for user in users:
         usersClient.delete_existing_user(email=user.email,
                                          password=user.password,

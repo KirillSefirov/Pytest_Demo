@@ -23,7 +23,7 @@ class UsersApiClient:
             "password": password
         }
         response = self.session.post(self.base_url + "users", json=user_data, timeout=5)
-        logging.log(level=logging.DEBUG, msg=response.text)
+        logging.log(level=logging.DEBUG, msg="Register user response " + str(response.status_code) + response.text)
         print(f"user with email = ${email} was created")
         return response
 
@@ -36,7 +36,7 @@ class UsersApiClient:
         headers = {"Authorization": "Bearer " + token}
 
         response = self.session.delete(self.base_url + "users/me", data=user_data, headers=headers, timeout=5)
-        logging.log(level=logging.DEBUG, msg=response.text)
+        logging.log(level=logging.DEBUG, msg="Delete user response " + str(response.status_code) + response.text)
         print(f"User with email = ${email} was deleted")
         return response
 
@@ -47,7 +47,7 @@ class UsersApiClient:
             'password': password
         }
         response = self.session.post(self.base_url + 'users/login', data=user_data, timeout=5)
-        logging.log(level=logging.DEBUG, msg=response.text)
+        logging.log(level=logging.DEBUG, msg="Login user response " + str(response.status_code) + response.text)
         print(f"Logged in by user {email}")
         return response
 
@@ -57,7 +57,7 @@ class UsersApiClient:
             'Authorization': "Bearer " + token
         }
         response = self.session.post(self.base_url + "users/logout", headers=headers, timeout=5)
-        logging.log(level=logging.DEBUG, msg=response.text)
+        logging.log(level=logging.DEBUG, msg="Logout user response " + str(response.status_code) + response.text)
         return response
 
     @allure.step("API. Getting existing user profile")
@@ -66,7 +66,7 @@ class UsersApiClient:
             "Authorization": "Bearer " + token
         }
         response = self.session.get(self.base_url + "users/me", headers=headers, timeout=5)
-        logging.log(level=logging.DEBUG, msg=response.text)
+        logging.log(level=logging.DEBUG, msg="Get user profile response " + str(response.status_code) + response.text)
         return response
 
     @allure.step("API. Updating existing user data")
@@ -82,7 +82,7 @@ class UsersApiClient:
             "Authorization": "Bearer " + token
         }
         response = self.session.patch(self.base_url + "users/me", data=user_data, headers=headers, timeout=5)
-        logging.log(level=logging.DEBUG, msg=response.text)
+        logging.log(level=logging.DEBUG, msg="Update user data response " + str(response.status_code) + response.text)
         nf = response.json()["firstName"]
         nl = response.json()["lastName"]
         print(f"User names were updated to {nf} and {nl}")
