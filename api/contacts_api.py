@@ -1,5 +1,6 @@
-import requests
 import allure
+import requests
+
 from api.users_api import UsersApiClient
 
 
