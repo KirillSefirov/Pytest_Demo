@@ -6,7 +6,7 @@ from api.users_api import UsersApiClient
 class ContactsApiClient(UsersApiClient):
 
     @allure.step("API. Adding a new contact to existing user")
-    def add_contact(self, user_email, token):
+    def add_contact(self, token):
         contact_info = {
             "firstName": "Kirill",
             "lastName": "Sefirov",
