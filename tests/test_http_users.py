@@ -58,11 +58,11 @@ def test_new_patch_update_user_profile(base_url_users, test_users, new_first_nam
                                                           user.email,
                                                           user.password,
                                                           user.token)
+        updated_user_info = base_url_users.get_user_profile(user.token)
         assert update_response.status_code == http.HTTPStatus.OK
         assert update_response.json()["firstName"] == new_first_name
         assert update_response.json()["lastName"] == new_last_name
 
-        updated_user_info = base_url_users.get_user_profile(user.token)
         assert updated_user_info.json()["firstName"] == new_first_name
         assert updated_user_info.json()["lastName"] == new_last_name
 

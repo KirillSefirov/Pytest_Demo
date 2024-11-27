@@ -1,9 +1,7 @@
 import logging
-from logging import DEBUG
 
 import allure
 import requests
-from requests import HTTPError
 
 
 class UsersApiClient:
@@ -41,7 +39,7 @@ class UsersApiClient:
         return response
 
     @allure.step("API. Logging in by existing user")
-    def login_by_user(self, email, password, token):
+    def login_by_user(self, email, password):
         user_data = {
             'email': email,
             'password': password
