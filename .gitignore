@@ -168,3 +168,5 @@ allure-result*/
 
 #Pytest logs
 logs/
+
+.DS_Store
