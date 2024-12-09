@@ -22,7 +22,8 @@ class UsersApiClient:
         }
         response = self.session.post(self.base_url + "users", json=user_data, timeout=5)
         logging.log(level=logging.DEBUG, msg="Register user response " + str(response.status_code) + response.text)
-        print(f"user with email = ${email} was created")
+        if response.status_code == 201:
+            print(f"user with email = ${email} was created")
         return response
 
     @allure.step("API. Deleting existing user")
